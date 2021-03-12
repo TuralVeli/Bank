@@ -54,14 +54,15 @@ class ConvertViewController: UIViewController ,UITableViewDelegate,UITableViewDa
     func didClick(cell: UITextField) {
         let text = cell.text!.replacingOccurrences(of: " ", with: "")
         let number  = Double(text) ?? 0.0
-        for i in IndexArray  {
-        if i != cell.tag{
+        for indextag in IndexArray  {
+        if  indextag != cell.tag{
 
-        let index = IndexPath(row: i, section:0)
+        let index = IndexPath(row: indextag, section:0)
         let cells: ConvertTableViewCell = self.tableView.cellForRow(at: index) as! ConvertTableViewCell
-        let filtered = currency[cell.tag].h.filter { $0.key == "\(currency[i].name)" }
+        let filtered = currency[cell.tag].h.filter { $0.key == "\(currency[indextag].name)" }
         let r = filtered.first!.value as! Double
-            cells.textField.text = " \(number * r )"
+           
+            cells.textField.text = "\(Double(round(1000 * (number * r))/1000))"
 
     }
             
